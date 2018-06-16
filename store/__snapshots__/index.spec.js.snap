@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`combineReducers should combine reducers 1`] = `
+Object {
+  "potatos": Object {
+    "data": Array [
+      true,
+    ],
+  },
+  "tomatos": Object {
+    "count": 0,
+  },
+}
+`;
+
+exports[`combineReducers should combine reducers 2`] = `
+Object {
+  "potatos": Object {
+    "data": Array [
+      true,
+      true,
+    ],
+  },
+  "tomatos": Object {
+    "count": 0,
+  },
+}
+`;
+
+exports[`combineReducers should combine reducers 3`] = `
+Object {
+  "potatos": Object {
+    "data": Array [
+      true,
+    ],
+  },
+  "tomatos": Object {
+    "count": 0,
+  },
+}
+`;
+
+exports[`createStore should create store with enhancer 1`] = `
+Object {
+  "dispatch": [Function],
+  "foo": true,
+  "getState": [Function],
+  "subscribe": [Function],
+}
+`;
+
+exports[`createStore should create store with reducer 1`] = `
+Object {
+  "dispatch": [Function],
+  "getState": [Function],
+  "subscribe": [Function],
+}
+`;
