@@ -1,3 +1,12 @@
+export const compose =
+  (...fns) =>
+    (...args) =>
+      fns.slice(0, -1).reverse().reduce(
+        (memo, fn) => fn(memo),
+        fns[fns.length - 1](...args),
+      );
+
+
 export const combineReducers =
   reducers =>
     (action, state) =>
@@ -24,7 +33,12 @@ export const createStore = (reducer, initialState = {}, enhancer) => {
     },
     subscribe: (listener) => {
       listeners.push(listener);
-      return () => {}; // unsubscribe?
+      return () => { // unsubscribe
+        const index = listeners.indexOf(listener);
+        if (index !== -1) {
+          listeners.splice(index, 1);
+        };
+      };
     },
   };
 

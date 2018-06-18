@@ -18,15 +18,3 @@ export const createElement = (tagName, opts = {}) => {
   }
   return element;
 };
-
-
-//
-// See redux#compose
-//
-export const compose =
-  (...fns) =>
-    (...args) =>
-      fns.slice(0, -1).reverse().reduce(
-        (memo, fn) => fn(memo),
-        fns[fns.length - 1](...args),
-      );
