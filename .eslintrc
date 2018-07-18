@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "extends": "airbnb-base",
+  "rules": {
+    "operator-linebreak": ["error", "after"],
+    "implicit-arrow-linebreak": "off"
+  }
+}
