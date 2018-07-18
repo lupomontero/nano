@@ -1,10 +1,13 @@
 //
 // Render component into given DOM Node
 //
-export const render = (component, root) => {
-  root.innerHTML = '';
-  root.appendChild(component({}));
-}
+export const render = (component, node) => {
+  const child = component({});
+  if (child) {
+    Object.assign(node, { innerHTML: '' });
+    node.appendChild(child);
+  }
+};
 
 
 //

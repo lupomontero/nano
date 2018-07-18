@@ -9,11 +9,11 @@ export const compose =
 
 export const combineReducers =
   reducers =>
-    (action, state) =>
+    (state, action) =>
       Object.keys(reducers).reduce((memo, key) => ({
         ...memo,
-        [key]: reducers[key](action, memo[key]),
-      }), state);
+        [key]: reducers[key](memo[key], action),
+      }), state || {});
 
 
 export const createStore = (reducer, initialState = {}, enhancer) => {
@@ -21,13 +21,13 @@ export const createStore = (reducer, initialState = {}, enhancer) => {
     return enhancer(createStore)(reducer, initialState);
   }
 
-  let state = reducer({ type: 'INIT' }, initialState);
+  let state = reducer(initialState, { type: 'INIT' });
   const listeners = [];
 
   const store = {
     getState: () => ({ ...state }),
     dispatch: (action) => {
-      state = reducer(action, { ...state });
+      state = reducer(state, action);
       listeners.forEach(listener => listener());
       return action;
     },
@@ -37,7 +37,7 @@ export const createStore = (reducer, initialState = {}, enhancer) => {
         const index = listeners.indexOf(listener);
         if (index !== -1) {
           listeners.splice(index, 1);
-        };
+        }
       };
     },
   };
@@ -51,6 +51,9 @@ export const Provider =
     component =>
       props => component({ ...props, store });
 
+// alias
+export const withStore = Provider;
+
 
 export const connect =
   (mapState, mapDispatch) =>
@@ -60,7 +63,7 @@ export const connect =
 
 export const applyMiddleware =
   (...middlewares) =>
-    (createStore) =>
+    createStore =>
       (reducers, initialState, enhancer) => {
         const store = createStore(reducers, initialState, enhancer);
         return {
@@ -73,7 +76,7 @@ export const applyMiddleware =
       };
 
 
-export const logger = store => next => action => {
+export const logger = store => next => (action) => {
   console.group(action.type);
   console.info('dispatching', action);
   const dispatchedAction = next(action);

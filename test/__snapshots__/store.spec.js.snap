@@ -35,7 +35,7 @@ Object {
     ],
   },
   "tomatos": Object {
-    "count": 0,
+    "count": 1,
   },
 }
 `;
