@@ -48,20 +48,6 @@ describe('combineReducers', () => {
 });
 
 
-const createCounterStore = () => createStore((state, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
-    case 'RESET':
-      return 0;
-    default:
-      return state;
-  }
-}, 0);
-
-
 describe('createStore', () => {
   it('should create store with reducer', () => {
     const reducer = state => state;
@@ -74,46 +60,6 @@ describe('createStore', () => {
     const enhancer = create => (r, i, e) => ({ ...create(r, i, e), foo: true });
     const store = createStore(reducer, undefined, enhancer);
     expect(store).toMatchSnapshot();
-  });
-
-  describe('store.getState', () => {
-    it('should get the current state', () => {
-      const store = createCounterStore();
-      expect(store.getState()).toBe(0);
-      expect(store.dispatch({ type: 'INCREMENT' })).toEqual({ type: 'INCREMENT' });
-      expect(store.getState()).toBe(1);
-      expect(store.dispatch({ type: 'INCREMENT' })).toEqual({ type: 'INCREMENT' });
-      expect(store.getState()).toBe(2);
-      expect(store.dispatch({ type: 'DECREMENT' })).toEqual({ type: 'DECREMENT' });
-      expect(store.getState()).toBe(1);
-      expect(store.dispatch({ type: 'RESET' })).toEqual({ type: 'RESET' });
-      expect(store.getState()).toBe(0);
-    });
-  });
-
-  describe('store.dispatch', () => {
-    it('should invoke reducers with given action and return the dispatched action', () => {
-      const store = createCounterStore();
-      expect(store.dispatch({ type: 'INCREMENT' })).toEqual({ type: 'INCREMENT' });
-    });
-  });
-
-  describe('store.subscribe', () => {
-    it('should register subscribers and return unsubscribe function', () => {
-      const store = createCounterStore();
-      const subscriber = jest.fn();
-      const unsubscribe = store.subscribe(subscriber);
-      expect(store.dispatch({ type: 'INCREMENT' })).toEqual({ type: 'INCREMENT' });
-      expect(subscriber.mock.calls.length).toBe(1);
-      expect(subscriber.mock.calls[0].length).toBe(0);
-
-      expect(store.dispatch({ type: 'INCREMENT' })).toEqual({ type: 'INCREMENT' });
-      expect(subscriber.mock.calls.length).toBe(2);
-
-      unsubscribe();
-      expect(store.dispatch({ type: 'INCREMENT' })).toEqual({ type: 'INCREMENT' });
-      expect(subscriber.mock.calls.length).toBe(2);
-    });
   });
 });
 
