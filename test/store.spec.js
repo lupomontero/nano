@@ -119,8 +119,16 @@ describe('createStore', () => {
 
 
 describe('Provider', () => {
-  it('should...', () => {
+  it('should be a function', () => {
     expect(typeof Provider).toBe('function');
+  });
+
+  it('should return a function that returns HOC', () => {
+    const store = createCounterStore();
+    const ComponentWithStore = Provider(store)(props => props);
+    const result = ComponentWithStore({ ok: true });
+    expect(result.ok).toBe(true);
+    expect(result.store).toBe(store);
   });
 });
 

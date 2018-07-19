@@ -48,8 +48,8 @@ export const createStore = (reducer, initialState, enhancer) => {
 
 export const Provider =
   store =>
-    component =>
-      props => component({ ...props, store });
+    Component =>
+      props => Component({ ...props, store });
 
 // alias
 export const withStore = Provider;
@@ -57,8 +57,8 @@ export const withStore = Provider;
 
 export const connect =
   (mapState, mapDispatch) =>
-    component =>
-      props => component({ ...props, ...mapState(props.store.getState()) });
+    Component =>
+      props => Component({ ...props, ...mapState(props.store.getState()) });
 
 
 export const applyMiddleware =
@@ -76,11 +76,11 @@ export const applyMiddleware =
       };
 
 
-export const logger = store => next => (action) => {
-  console.group(action.type);
-  console.info('dispatching', action);
-  const dispatchedAction = next(action);
-  console.log('next state', store.getState());
-  console.groupEnd();
-  return dispatchedAction;
-};
+// export const logger = store => next => (action) => {
+//   console.group(action.type);
+//   console.info('dispatching', action);
+//   const dispatchedAction = next(action);
+//   console.log('next state', store.getState());
+//   console.groupEnd();
+//   return dispatchedAction;
+// };
