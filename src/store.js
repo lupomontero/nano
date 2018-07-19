@@ -16,7 +16,7 @@ export const combineReducers =
       }), state || {});
 
 
-export const createStore = (reducer, initialState = {}, enhancer) => {
+export const createStore = (reducer, initialState, enhancer) => {
   if (typeof enhancer === 'function') {
     return enhancer(createStore)(reducer, initialState);
   }
@@ -25,7 +25,7 @@ export const createStore = (reducer, initialState = {}, enhancer) => {
   const listeners = [];
 
   const store = {
-    getState: () => ({ ...state }),
+    getState: () => state,
     dispatch: (action) => {
       state = reducer(state, action);
       listeners.forEach(listener => listener());
