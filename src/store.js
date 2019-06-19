@@ -58,12 +58,16 @@ export const withStore = Provider;
 export const connect =
   (mapState, mapDispatch) =>
     Component =>
-      props => Component({ ...props, ...mapState(props.store.getState()) });
+      props => Component({
+        ...props,
+        ...mapState(props.store.getState()),
+        ...mapDispatch(props.store.dispatch),
+      });
 
 
 export const applyMiddleware =
   (...middlewares) =>
-    createStore =>
+    createStore => // eslint-disable-line no-shadow
       (reducers, initialState, enhancer) => {
         const store = createStore(reducers, initialState, enhancer);
         return {
