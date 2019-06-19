@@ -1,3 +1,14 @@
+export {
+  compose,
+  combineReducers,
+  createStore,
+  Provider,
+  withStore,
+  connect,
+  applyMiddleware,
+} from './store';
+
+
 //
 // Render component into given DOM Node
 //
