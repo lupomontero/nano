@@ -1,12 +1,11 @@
-const {
+import {
   compose,
   combineReducers,
   createStore,
   Provider,
   connect,
   applyMiddleware,
-} = require('../src/store');
-
+} from '../store';
 
 describe('compose', () => {
   it('should compose functions', () => {
@@ -17,7 +16,6 @@ describe('compose', () => {
     expect(compose(fn1, fn2, fn3)(1, 2, 3)).toEqual([1, 2, 3, true, true, true]);
   });
 });
-
 
 describe('combineReducers', () => {
   it('should combine reducers', () => {
@@ -47,7 +45,6 @@ describe('combineReducers', () => {
   });
 });
 
-
 const createCounterStore = () => createStore((state, action) => {
   switch (action.type) {
     case 'INCREMENT':
@@ -60,7 +57,6 @@ const createCounterStore = () => createStore((state, action) => {
       return state;
   }
 }, 0);
-
 
 describe('createStore', () => {
   it('should create store with reducer', () => {
@@ -117,7 +113,6 @@ describe('createStore', () => {
   });
 });
 
-
 describe('Provider', () => {
   it('should be a function', () => {
     expect(typeof Provider).toBe('function');
@@ -132,13 +127,11 @@ describe('Provider', () => {
   });
 });
 
-
 describe('connect', () => {
   it('should...', () => {
     expect(typeof connect).toBe('function');
   });
 });
-
 
 describe('applyMiddleware', () => {
   it('should...', () => {

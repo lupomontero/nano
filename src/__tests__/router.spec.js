@@ -1,12 +1,10 @@
-import { Router, routerReducer } from '../src/router';
-
+import { Router, routerReducer } from '../router';
 
 describe('Router (aka withRouter)', () => {
   it('should...', () => {
     expect(typeof Router).toBe('function');
   });
 });
-
 
 describe('routerReducer', () => {
   it('should return initial state en no previous state', () => {
