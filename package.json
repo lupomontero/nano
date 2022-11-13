@@ -19,7 +19,7 @@
     "eslint-plugin-import": "^2.20.2",
     "jest": "^25.5.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.12"
   },
   "browser": "./dist/nano.min.js"
 }
